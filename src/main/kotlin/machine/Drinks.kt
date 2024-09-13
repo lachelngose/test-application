@@ -1,7 +1,7 @@
 package org.example.machine
 
 enum class Drinks(
-    val kor: String,
+    val displayName: String,
     val price: Int,
 ) {
     COKE("콜라", 1100),

@@ -1,0 +1,45 @@
+@startuml
+
+!define RECTANGLE class
+
+RECTANGLE VendingMachine {
+  +balance: Int
+  +paymentMethod: PaymentMethod
+  +selectDrink(drink: Drink): Drink
+  +insertMoney(amount: Int): void
+  +processPayment(drink: Drink): Boolean
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+}
+
+class Drink {
+  -name: String
+  -price: Int
+}
+
+Drink <|-- Cola
+Drink <|-- Water
+Drink <|-- Coffee
+
+class Cola {
+  -price: 1100
+  -displayName: "콜라"
+}
+
+class Water {
+  -price: 600
+  -displayName: "물"
+}
+
+class Coffee {
+  -price: 700
+  -displayName: "커피"
+}
+
+VendingMachine --> PaymentMethod
+VendingMachine --> Drink
+
+@enduml

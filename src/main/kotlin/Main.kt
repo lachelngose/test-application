@@ -7,20 +7,19 @@ import org.example.machine.VendingMachine
 fun main() {
     val vendingMachine = VendingMachine()
 
-    println("\n--- 테스트 1: 현금 결제 ---")
+    println("=== 정상적인 상황 ===")
+    vendingMachine.displayAvailableDrinks()
+    vendingMachine.displayPaymentMethods()
+    vendingMachine.selectPaymentMethod(PaymentMethod.CASH)
+    vendingMachine.insertCash(5000)
+    vendingMachine.selectDrink(Drinks.COKE)
+
+    println("\n=== 금액 부족 예외 상황 ===")
     vendingMachine.selectPaymentMethod(PaymentMethod.CASH)
     vendingMachine.insertCash(500)
-    vendingMachine.insertCash(500)
-    vendingMachine.selectDrink(Drinks.COKE) // 금액 부족
+    vendingMachine.selectDrink(Drinks.COKE)
 
-    println("\n--- 테스트 2: 추가 현금 투입 후 결제 ---")
-    vendingMachine.insertCash(100)
-    vendingMachine.selectDrink(Drinks.COKE) // 결제 성공
-
-    println("\n--- 테스트 3: 카드 결제 ---")
+    println("\n=== 카드 결제 상황 ===")
     vendingMachine.selectPaymentMethod(PaymentMethod.CARD)
-    vendingMachine.selectDrink(Drinks.WATER) // 카드 결제
-
-    println("\n--- 테스트 4: 잘못된 순서로 결제 시도 ---")
-    vendingMachine.selectDrink(Drinks.COFFEE) // 결제 방법 미선택 오류
+    vendingMachine.selectDrink(Drinks.WATER)
 }

@@ -1,0 +1,28 @@
+@startuml
+actor User
+participant "VendingMachine" as vm
+participant "Drinks" as d
+
+User -> vm: insertCash(amount)
+vm -> vm: validateCash(amount)
+vm -> vm: update insertedCash
+
+User -> vm: selectPaymentMethod(paymentMethod)
+vm -> vm: set selectedPaymentMethod
+
+User -> vm: selectDrink(drink)
+alt Payment method: Cash
+    vm -> vm: processCashPayment(drink)
+    alt Sufficient cash
+        vm -> vm: dispense drink
+        vm -> vm: return change
+    else Insufficient cash
+        vm -> User: request more cash
+    end
+else Payment method: Card
+    vm -> vm: processCardPayment(drink)
+    vm -> vm: dispense drink
+end
+
+vm -> vm: resetTransaction
+@enduml
